@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CarSingleCard = () => {
+const AllCars = () => {
     return (
         <div>
             <h1>Toyota</h1>
@@ -8,4 +8,4 @@ const CarSingleCard = () => {
     );
 };
 
-export default CarSingleCard;
+export default AllCars;
