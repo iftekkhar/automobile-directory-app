@@ -1,10 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const AllCars = () => {
+const AllCars = ({ car }) => {
     return (
-        <div>
-            <h1>Toyota</h1>
-        </div>
+        <Link to={`car/${car._id}`}>
+            <div>
+                <h1>{car.title}</h1>
+                <p>{car.model}</p>
+                <img src={car.featuredImage} />
+            </div>
+        </Link>
     );
 };
 

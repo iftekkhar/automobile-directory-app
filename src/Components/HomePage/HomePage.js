@@ -7,7 +7,10 @@ const HomePage = () => {
     console.log(cars)
     return (
         <div>
-            <AllCars />
+            {cars.map(car => (
+                <AllCars key={car._id} car={car} />
+            ))}
+
         </div>
     );
 };

@@ -4,7 +4,8 @@ import HomePage from './Components/HomePage/HomePage';
 import AddCars from './Components/AddCars/AddCars';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getCars } from './Components/redux/actions/carActions'
+import { getCars } from './Components/ReduxState/Actions/CarActions'
+import Car from './Components/HomePage/AllCars/Car/Car';
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/add-car">
             <AddCars />
+          </Route>
+          <Route path="/car/:id">
+            <Car />
           </Route>
         </Switch>
       </Router>
