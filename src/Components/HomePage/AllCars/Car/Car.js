@@ -1,8 +1,9 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
+import { deleteCar } from '../../../ReduxState/Actions/CarActions';
+import { useHistory } from "react-router-dom";
 
 const Car = () => {
     const [currentCar, setCurrentCar] = useState({})
@@ -11,15 +12,22 @@ const Car = () => {
     useEffect(() => {
         const filteredCar = cars.find(car => car._id === id);
         setCurrentCar(filteredCar);
-    }, [id, cars])
+    }, [id, cars]);
+
+    let history = useHistory();
+    const dispatch = useDispatch()
+    const handleDelete = () => {
+        dispatch(deleteCar(currentCar._id))
+        history.push('/');
+    }
     return (
         <div>
             <h1>{currentCar?.title}</h1>
             <p>{currentCar?.model}</p>
             <p>{currentCar?.details}</p>
-            <img src={currentCar?.featuredImage} />
+            <img src={currentCar?.featuredImage} alt={currentCar?.title} />
             <Button>Edit</Button>
-            <Button>Delete</Button>
+            <Button onClick={handleDelete}>Delete</Button>
         </div>
     );
 };

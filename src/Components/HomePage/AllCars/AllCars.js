@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const AllCars = ({ car }) => {
     return (
-        <Link to={`car/${car._id}`}>
+        <Link to={`vehicle/${car._id}`}>
             <div>
                 <h1>{car.title}</h1>
                 <p>{car.model}</p>
-                <img src={car.featuredImage} />
+                <img src={car.featuredImage} alt={car.title} />
             </div>
         </Link>
     );
