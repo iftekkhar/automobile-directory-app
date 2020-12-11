@@ -13,7 +13,12 @@ const HomePage = () => {
                 car.title.toLowerCase().includes(search.toLowerCase())
             )
         );
-    }, [search, cars]);
+        return (() => {
+            setFilteredResult([])
+        }
+
+        )
+    }, [search]);
 
     return !cars.length ? <CircularProgress /> : (
         <div>
@@ -22,12 +27,16 @@ const HomePage = () => {
                 placeholder="Search Vehicles"
                 onChange={(e) => setSearch(e.target.value)}
             />
-            { filteredResult.length ?
+            { (filteredResult.length && search.length) ?
                 filteredResult.map(car => (
                     <AllCars key={car._id} car={car} />
                 ))
                 :
-                <h2>Nothing Found</h2>
+                <>
+                    {
+                        !search.length ? <h2>Seach Somthing</h2> : <h2>Nothing Found</h2>
+                    }
+                </>
             }
 
         </div>
