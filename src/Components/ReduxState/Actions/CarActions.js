@@ -18,3 +18,11 @@ export const addNewCar = (car) => async (dispatch) => {
         console.log(error)
     }
 }
+export const updateCar = (id, updatedCar) => async (dispatch) => {
+    try {
+        const { data } = await api.updateCar(id, updatedCar);
+        dispatch({ type: 'UPDATE_CAR', payload: data })
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -8,8 +9,8 @@ const Car = () => {
     const cars = useSelector(state => state.cars)
     let { id } = useParams();
     useEffect(() => {
-        const filteredCar = cars.filter(car => car._id === id);
-        setCurrentCar(filteredCar[0]);
+        const filteredCar = cars.find(car => car._id === id);
+        setCurrentCar(filteredCar);
     }, [id, cars])
     return (
         <div>
@@ -17,6 +18,8 @@ const Car = () => {
             <p>{currentCar?.model}</p>
             <p>{currentCar?.details}</p>
             <img src={currentCar?.featuredImage} />
+            <Button>Edit</Button>
+            <Button>Delete</Button>
         </div>
     );
 };
