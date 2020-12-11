@@ -1,9 +1,11 @@
-import { Button } from '@material-ui/core';
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { deleteCar } from '../../../ReduxState/Actions/CarActions';
 import { useHistory } from "react-router-dom";
+import './Car.css';
+import EditCar from './EditCar';
 
 const Car = () => {
     const [currentCar, setCurrentCar] = useState({})
@@ -21,14 +23,28 @@ const Car = () => {
         history.push('/');
     }
     return (
-        <div>
-            <h1>{currentCar?.title}</h1>
-            <p>{currentCar?.model}</p>
-            <p>{currentCar?.details}</p>
-            <img src={currentCar?.featuredImage} alt={currentCar?.title} />
-            <Button>Edit</Button>
-            <Button onClick={handleDelete}>Delete</Button>
-        </div>
+        <Grid container spacing={3}>
+            <Grid item xs={12}>
+                <Paper elevation={3} className="vehicle-details-single" m={2}>
+                    <div>
+                        <img src={currentCar?.featuredImage} alt={currentCar?.title} width="100%" />
+                    </div>
+                    <div>
+                        <Typography variant="h2" gutterBottom align="center"> {currentCar?.title}</Typography>
+                        <Typography variant="h5" gutterBottom align="center"> {currentCar?.model}</Typography>
+                        <Typography variant="h6" gutterBottom align="center"> {currentCar?.details}</Typography>
+                    </div>
+                    <div className="vehicle-details-single-button-position">
+                        <Button variant="contained" color="secondary" onClick={handleDelete}>Delete</Button>
+                        <EditCar title={currentCar?.title} model={currentCar?.model} details={currentCar?.details} featuredImage={currentCar?.featuredImage} _id={currentCar?._id}></EditCar>
+
+
+                    </div>
+
+
+                </Paper>
+            </Grid>
+        </Grid>
     );
 };
 

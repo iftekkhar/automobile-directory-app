@@ -1,0 +1,12 @@
+.vehicle-list {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+.vehicle-list-img {
+  width: 20%;
+}
+.vehicle-list-text {
+  padding-left: 30px;
+}

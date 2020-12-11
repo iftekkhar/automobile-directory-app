@@ -1,0 +1,15 @@
+.appbar-section {
+  margin-bottom: 60px;
+}
+.appbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.appbar a {
+  color: #fff;
+  text-decoration: none;
+}
+.nav a {
+  padding-left: 20px;
+}

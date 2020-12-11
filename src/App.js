@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getCars } from './Components/ReduxState/Actions/CarActions'
 import Car from './Components/HomePage/AllCars/Car/Car';
+import { Container } from '@material-ui/core';
+import Header from './Components/Shared/Header';
 
 
 function App() {
@@ -15,9 +17,10 @@ function App() {
     dispatch(getCars());
   }, [dispatch])
   return (
-    <div className="App">
-      <Router>
-        <AddCars />
+
+    <Router>
+      <Header />
+      <Container maxWidth='lg' className="App">
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -29,8 +32,9 @@ function App() {
             <Car />
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </Container>
+    </Router>
+
   );
 };
 

@@ -1,0 +1,8 @@
+.vehicle-details-single-button-position {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.vehicle-details-single {
+  padding: 40px;
+}
