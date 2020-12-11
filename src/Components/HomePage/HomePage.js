@@ -28,7 +28,7 @@ const HomePage = () => {
                     :
                     <>
                         {
-                            !search.length ? <Typography variant="h4" gutterBottom align="center"> Please Search Somthing</Typography> : <Typography variant="h4" gutterBottom align="center"> Nothing Is Found</Typography>
+                            !search.length ? <Typography variant="h4" gutterBottom align="center">Type into the box to find your favorite car....</Typography> : <Typography variant="h4" gutterBottom align="center">Not Found. Please Search for something else</Typography>
                         }
                     </>
                 }

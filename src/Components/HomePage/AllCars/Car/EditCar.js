@@ -21,13 +21,7 @@ const customStyles = {
 
 const EditCar = ({ title, model, details, featuredImage, _id }) => {
 
-    // const currentCarData = {
-    //     title: title,
-    //     model: model,
-    //     details: details,
-    //     featuredImage: featuredImage,
-    //     _id: _id,
-    // }
+
     const [newCarData, setNewCarData] = useState({});
     const parseNewData = async () => {
         return await setNewCarData({
@@ -38,9 +32,7 @@ const EditCar = ({ title, model, details, featuredImage, _id }) => {
             _id: _id,
         })
     }
-    // useEffect(() => {
-    //     parseNewData()
-    // }, [])
+
     const [modalIsOpen, setIsOpen] = React.useState(false);
     function openModal() {
         setIsOpen(true);
@@ -59,7 +51,7 @@ const EditCar = ({ title, model, details, featuredImage, _id }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateCar(_id, newCarData));
-        closeModal();
+        setTimeout(function () { closeModal(); }, 1000);
     }
     return (
         <div>
