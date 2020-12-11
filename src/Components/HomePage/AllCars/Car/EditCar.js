@@ -1,5 +1,5 @@
 import { Paper, TextField, Grid, Button, Typography, FormControl } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FileBase from 'react-file-base64';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
@@ -20,33 +20,34 @@ const customStyles = {
 
 
 const EditCar = ({ title, model, details, featuredImage, _id }) => {
-    const [editTitle, setEditTitle] = useState('title');
-    const handleEditTitle = (e) => setEditTitle(e.target.value);
 
-    const [editDetails, setEditDetails] = useState(details);
-    const handleEditDescription = (e) => setEditDetails(e.target.value);
-
-    const [selectedModel, setSelectedModel] = useState(model);
-    const handleModelChange = (e) => setSelectedModel(e.target.value);
-    const [selectedFeaturedImage, setSelectedFeaturedImage] = useState(model);
-    const handleImageChange = (e) => setSelectedFeaturedImage(e.target.value);
-
-    const currentCarData = {
-        title: title,
-        model: model,
-        details: `${details}`,
-        featuredImage: `${featuredImage}`,
-        _id: _id,
+    // const currentCarData = {
+    //     title: title,
+    //     model: model,
+    //     details: details,
+    //     featuredImage: featuredImage,
+    //     _id: _id,
+    // }
+    const [newCarData, setNewCarData] = useState({});
+    const parseNewData = async () => {
+        return await setNewCarData({
+            title: title,
+            model: model,
+            details: details,
+            featuredImage: featuredImage,
+            _id: _id,
+        })
     }
-    const [newCarData, setNewCarData] = useState({ ...currentCarData })
+    // useEffect(() => {
+    //     parseNewData()
+    // }, [])
     const [modalIsOpen, setIsOpen] = React.useState(false);
     function openModal() {
         setIsOpen(true);
     }
 
     function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        // subtitle.style.color = '#f00';
+        parseNewData();
     }
 
     function closeModal() {
@@ -58,16 +59,8 @@ const EditCar = ({ title, model, details, featuredImage, _id }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateCar(_id, newCarData));
-        setNewCarData({
-            title: '',
-            model: '',
-            details: '',
-            featuredImage: ''
-        })
+        closeModal();
     }
-    console.log(title, model, details, featuredImage, _id)
-    console.log(currentCarData)
-    console.log(newCarData)
     return (
         <div>
             <Button variant="contained" color="primary" onClick={openModal}>Edit Post</Button>
@@ -82,15 +75,15 @@ const EditCar = ({ title, model, details, featuredImage, _id }) => {
                 <div>
                     <form autoComplete="off" onSubmit={handleSubmit}>
                         <FormControl fullWidth margin="normal" >
-                            <TextField name="title" variant="outlined" label="Brand Name" Value={editTitle} onChange={handleEditTitle} />
+                            <TextField name="title" variant="outlined" label="Brand Name" value={newCarData.title} onChange={e => setNewCarData({ ...newCarData, title: e.target.value })} />
                         </FormControl>
                         <FormControl fullWidth margin="normal">
-                            <TextField name="model" variant="outlined" label="Model Number" dafaultValue={currentCarData?.model} onChange={e => setNewCarData({ ...newCarData, model: e.target.value })} />
+                            <TextField name="model" variant="outlined" label="Model Number" value={newCarData?.model} onChange={e => setNewCarData({ ...newCarData, model: e.target.value })} />
                         </FormControl>
                         <FormControl fullWidth margin="normal">
-                            <TextField multiline rows={4} name="details" variant="outlined" label="Details" dafaultValue={currentCarData?.details} onChange={e => setNewCarData({ ...newCarData, details: e.target.value })} />
+                            <TextField multiline rows={4} name="details" variant="outlined" label="Details" value={newCarData?.details} onChange={e => setNewCarData({ ...newCarData, details: e.target.value })} />
                         </FormControl>
-                        <div id="upload_button"> <FileBase type='file' multiple={false} dafaultValue={currentCarData?.featuredImage} onDone={({ base64 }) => setNewCarData({ ...newCarData, featuredImage: base64 })} /></div>
+                        <div id="upload_button"> <FileBase type='file' multiple={false} value={newCarData?.featuredImage} onDone={({ base64 }) => setNewCarData({ ...newCarData, featuredImage: base64 })} /></div>
                         <Button variant="contained" color="primary" size="large" type="submit">Submit</Button>
                     </form>
                 </div>

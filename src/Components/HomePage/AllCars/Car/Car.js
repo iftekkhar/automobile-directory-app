@@ -26,7 +26,7 @@ const Car = () => {
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <Paper elevation={3} className="vehicle-details-single" m={2}>
-                    <div>
+                    <div className="vehicle-details-single-img">
                         <img src={currentCar?.featuredImage} alt={currentCar?.title} width="100%" />
                     </div>
                     <div>

@@ -2,6 +2,7 @@ import { Paper, TextField, Button, Grid, FormControl, Typography } from '@materi
 import React, { useState } from 'react';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { addNewCar } from '../ReduxState/Actions/CarActions';
 import './AddCar.css';
 const AddCars = () => {
@@ -12,15 +13,12 @@ const AddCars = () => {
         featuredImage: ''
     })
     const dispatch = useDispatch();
+    let history = useHistory();
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(addNewCar(carData));
-        setCarData({
-            title: '',
-            model: '',
-            details: '',
-            featuredImage: ''
-        })
+        history.push('/');
+
     }
     return (
 
